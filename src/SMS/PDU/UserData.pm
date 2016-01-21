@@ -19,7 +19,7 @@
 #
 package SMS::PDU::UserData;
 
-use strict;
+#use strict;
 use warnings;
 use vars qw(@ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 
@@ -203,6 +203,7 @@ sub encode
 {
   my $self = shift;
 
+
   # encode UDH
   my $udh = $self->encode_udh;
 
@@ -276,7 +277,7 @@ sub encode_udh
     $hdr .= pack('C', $self->{fmax});              # max amount of frags
     $hdr .= pack('C', $self->{fsn});               # sequence number fragment
   }
- 
+  return '';#tony
   if (length($hdr))
   {
     return pack('C', length($hdr)) . $hdr;

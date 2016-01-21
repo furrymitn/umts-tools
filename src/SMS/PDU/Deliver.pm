@@ -150,11 +150,14 @@ sub encode
   $hdr .= pack('C', $self->{'TP-DCS'});
 
   # SCTS
-  $hdr .= pack('CCCCCCC', 0);
 
+  my @scts=split(/,/,$self->{'TP-SCTS'});
+  $hdr .= pack('H2H2H2H2H2H2H2',@scts);#pack('C', 61);
+
+    #$hdr .= pack('CCCCCCC', 0);
   # frame length 
   my ($data,$len) = $self->{'TP-UD'}->encode;  
-  return $hdr . pack('C', $len) . $data;    
+  return $len,$hdr . pack('C', $len) . $data;    
 }
 
 
